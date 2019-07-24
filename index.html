@@ -28,10 +28,16 @@
 <p>The rise of manmade global warming skepticism offer various natural causes to explain the rising temperature since 1880. 
   Since then Earth temperature has risen by 1.4 degrees Fahrenheit.</p>
    
-<svg width = 300 height = 600>
+<svg width = 600 height = 600>
    </svg>
    <script>
      var data = []
+     var width = 600 height = 300
+     
+     var x = d3.scaleLinear().domain([0,850]).range([0,width]);
+     var y = d3.scaleLinear().domain([-2,2]).range([height,0]);
+     
+     
    </script>
    
    <a href="#" class="prev">&laquo;Previous</a>
