@@ -37,6 +37,16 @@
      var x = d3.scaleLinear().domain([0,850]).range([0,width]);
      var y = d3.scaleLinear().domain([-2,2]).range([height,0]);
      
+     svg.append("g")
+       .attr("class", "x axis")
+       .attr("transform", "translate(0, "+height+")")
+       .call(d3.axisBottom(xScale));
+     
+     svg.append("g")
+       .attr("class", "y axis")
+       .call(d3.axisLeft(yScale))
+       
+     
      
    </script>
    
