@@ -64,25 +64,15 @@ chart.attr("width",width + 2*margin)
     .attr("x",function(d,i) { return x(i); })
     .attr("y",function(d) { return y(d); });
 
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom")
-    .ticks(1);
-
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left")
-    .ticks(5);
-
 chart.append("g")
     .attr("transform", "translate(" + margin + "," + (height+margin) + ")")
     .attr("class","axis")
-    .call(xAxis);
+    .call(d3.axisLeft(x));
     
 chart.append("g")
     .attr("transform", "translate(" + margin + "," + margin + ")")
     .attr("class","axis")
-    .call(yAxis);
+    .call(d3.axisBottom(y));
      
 
    </script>
