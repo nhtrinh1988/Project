@@ -65,14 +65,14 @@ chart.attr("width",width + 2*margin)
     .attr("y",function(d) { return y(d); });
 
 chart.append("g")
-    .attr("transform", "translate(" + margin + "," + (height+margin) + ")")
-    .attr("class","axis")
-    .call(d3.axisLeft(x));
-    
-chart.append("g")
     .attr("transform", "translate(" + margin + "," + margin + ")")
     .attr("class","axis")
     .call(d3.axisBottom(y));
+	   
+chart.append("g")
+    .attr("transform", "translate(" + margin + "," + (height+margin) + ")")
+    .attr("class","axis")
+    .call(d3.axisLeft(x));
      
 
    </script>
