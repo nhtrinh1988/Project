@@ -62,11 +62,11 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://github.com/nhtrinh1988/Project/blob/master/temperature.csv")
+d3.csv("temperature.csv")
 
   // Add X axis
   var x = d3.scaleLinear()
-    .domain([0, 850])
+    .domain([1880, 2018])
     .range([ 0, width ]);
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
