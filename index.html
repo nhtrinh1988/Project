@@ -34,14 +34,18 @@
    One visible indicator for this shift is the changes in glacier mass globally. There have been hundreds of reports in glacier's continued retreat and thinning the second half of the 20th century.
    According to National Scow and Ice Data Center report by NASA, the front of the glacier moved back about seven miles while its thickness decreased by more than 2,625 feet.
    So the big question for this event is "What's really warming the World?", the skeptics of manmade climate change offer various natural causes to explain this phenomenon.</p>
-<svg width= 400, height = 400>
+<svg class ="chart">
    </svg>
    <script>
+     var margin = 30;
+     var width = 300;
+     var height = 300;
+
      data = d3.csv("/temperature.csv").get(function(data){console.log(data);})
      
      var margin = {top: 20, right: 20, bottom:20, left: 20},
-         width = 400 - margin.left - margin.right,
-         height = 400 - margin.top - margin.bottom;
+         width = width - margin.left - margin.right,
+         height = height - margin.top - margin.bottom;
      
      var n = 851;
      
