@@ -44,47 +44,54 @@
    According to National Scow and Ice Data Center report by NASA, the front of the glacier moved back about seven miles while its thickness decreased by more than 2,625 feet.
    So the big question for this event is "What's really warming the World?", the skeptics of manmade climate change offer various natural causes to explain this phenomenon.</p>
 <svg class ="chart"></svg>
-   <script>
-var margin = 30;
-var width = 600;
-var height = 300;
+<script>
 
-var data = d3.csv("temperature.csv");
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
-var x = d3.scaleBand()
-	.domain([0,850])
-    .range([0,width]);
-    
-var y = d3.scaleLinear()
-	.domain([0,2])
-    .range([height,0]);
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
 
-var chart = d3.select(".chart");
+//Read the data
+d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function(data) {
 
-chart.attr("width",width + 2*margin)
-    .attr("height",height + 2*margin)
-    .append("g")
-        .attr("transform","translate(" + margin + "," + margin + ")")
-    .selectAll("rect")
-	.data(data)
-    .enter().append("rect")
-    .attr("width", x.bandwidth())
-    .attr("height",function(d) { return height - y(d); })
-    .attr("x",function(d,i) { return x(i); })
-    .attr("y",function(d) { return y(d); });
+  // Add X axis
+  var x = d3.scaleLinear()
+    .domain([0, 4000])
+    .range([ 0, width ]);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
 
-chart.append("g")
-    .attr("transform", "translate(" + margin + "," + margin + ")")
-    .attr("class","axis")
-    .call(d3.axisBottom(y));
-	   
-chart.append("g")
-    .attr("transform", "translate(" + margin + "," + (height+margin) + ")")
-    .attr("class","axis")
-    .call(d3.axisLeft(x));
-     
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, 500000])
+    .range([ height, 0]);
+  svg.append("g")
+    .call(d3.axisLeft(y));
 
-   </script>
+  // Add dots
+  svg.append('g')
+    .selectAll("dot")
+    .data(data)
+    .enter()
+    .append("circle")
+      .attr("cx", function (d) { return x(d.GrLivArea); } )
+      .attr("cy", function (d) { return y(d.SalePrice); } )
+      .attr("r", 1.5)
+      .style("fill", "#69b3a2")
+
+})
+
+</script>
    
    <a href="TheSun.html" class="next">The Sun?&raquo;</a>
    <a href="Volcanoes.html" class="next">Volcanoes?&raquo;</a>
