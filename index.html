@@ -74,7 +74,7 @@ d3.csv("temperature.csv", function(data) {
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([-1, 1])
+    .domain([-2, 2])
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
