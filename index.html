@@ -68,7 +68,7 @@ d3.csv("#temperature.csv",
   function(data) {
 
     // Add X axis --> it is a date format
-    var x = d3.scaleTime()
+    var x = d3.scaleBand()
       .domain([0,850])
       .range([ 0, width ]);
     svg.append("g")
