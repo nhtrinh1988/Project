@@ -11,32 +11,6 @@
 </head>
 
 <body>
-  <style>
-a {
-  text-decoration: none;
-  display: inline-block;
-  padding: 8px 16px;
-}
-
-a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.previous {
-  background-color: #f1f1f1;
-  color: black;
-}
-
-.next {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.round {
-  border-radius: 50%;
-}
-</style>
   <h1>Japan Population</h1>
   <p></p>
 <script>
@@ -73,7 +47,7 @@ svg.append("g")
 
 // Add Y axis
 var y = d3.scaleLinear()
-  .domain([210000, 130000])
+  .domain([116000, 130000])
   .range([ height, 0]);
 svg.append("g")
   .call(d3.axisLeft(y));
@@ -101,6 +75,6 @@ svg.selectAll("rect")
 })
 
 </script>
-  <a href="#BirthRatevsDeathRate.html"><button>Birth Rate vs Death Rate </button></a>
+ <a href="#BirthRatevsDeathRate.html"><button>Birth Rate vs Death Rate </button></a>
 </body>
 </html>
