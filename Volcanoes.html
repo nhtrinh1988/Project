@@ -1,13 +1,14 @@
 <html>
 <meta charset="utf-8">
 <script src="https://d3js.org/d3.v5.min.js"></script>
+ <div id="population"></div>
  <body>
   <h1> Japan Population </h1>
 
    
    <a href="page2.html" class="prev">&laquo;Previous</a>
    <a href="page4.html" class="next">Next&raquo;</a>
-   
+
   </body>
   <script>
 
@@ -17,7 +18,7 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var svg = d3.select("#population")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -38,7 +39,7 @@ d3.csv("https://raw.githubusercontent.com/nhtrinh1988/Project/master/japanPopula
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([0, 55000000])
+    .domain([9000, 13000])
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
@@ -51,7 +52,7 @@ d3.csv("https://raw.githubusercontent.com/nhtrinh1988/Project/master/japanPopula
     .append("circle")
       .attr("cx", function (d) { return x(d.GrLivArea); } )
       .attr("cy", function (d) { return y(d.SalePrice); } )
-      .attr("r", 1.5)
+      .attr("r", 2)
       .style("fill", "#69b3a2")
 
 })
