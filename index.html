@@ -2,8 +2,8 @@
 <meta charset="utf-8">
 <script src="https://d3js.org/d3.v5.min.js"></script>
   
-<button onclick="update(data1)">Variable 1</button>
-<button onclick="update(data2)">Variable 2</button>
+<button onclick="update(data1)">Death Rate (per 1000 people)</button>
+<button onclick="update(data2)">Birth Rate (per 1000 people)</button>
 <div id="lifeExpectency"></div>
   
 <head>
@@ -15,71 +15,69 @@
 <script>
   // create 2 data_set
 var data1 = [
-   {group: "1988", value: 30468750},
-   {group: "1989", value: 30976879},
-   {group: "1990", value: 31512637},
-   {group: "1991", value: 32043729},
-   {group: "1992", value: 32998803},
-   {group: "1993", value: 90},
-   {group: "1994", value: 90},
-   {group: "1995", value: 90},
-   {group: "1996", value: 90},
-   {group: "1997", value: 90},
-   {group: "1998", value: 90},
-   {group: "1999", value: 90},
-   {group: "2000", value: 90},
-   {group: "2001", value: 90},
-   {group: "2002", value: 90},
-   {group: "2003", value: 90},
-   {group: "2004", value: 90},
-   {group: "2005", value: 90},
-   {group: "2006", value: 90},
-   {group: "2007", value: 90},
-   {group: "2008", value: 90},
-   {group: "2009", value: 90},
-   {group: "2010", value: 90},
-   {group: "2011", value: 90},
-   {group: "2012", value: 90},
-   {group: "2013", value: 90},
-   {group: "2014", value: 90},
-   {group: "2015", value: 90},
-   {group: "2016", value: 90},
-   {group: "2017", value: 90},
-   {group: "2018", value: 90}
+   {group: "1988", value: 10.8},
+   {group: "1989", value: 10.2},
+   {group: "1990", value: 10},
+   {group: "1991", value: 9.9},
+   {group: "1992", value: 9.8},
+   {group: "1993", value: 9.6},
+   {group: "1994", value: 10},
+   {group: "1995", value: 9.54},
+   {group: "1996", value: 9.6},
+   {group: "1997", value: 9.5},
+   {group: "1998", value: 9.6},
+   {group: "1999", value: 9.3},
+   {group: "2000", value: 9.4},
+   {group: "2001", value: 9.1},
+   {group: "2002", value: 9.3},
+   {group: "2003", value: 9.2},
+   {group: "2004", value: 8.6},
+   {group: "2005", value: 8.4},
+   {group: "2006", value: 8.6},
+   {group: "2007", value: 8.6},
+   {group: "2008", value: 8.7},
+   {group: "2009", value: 8.5},
+   {group: "2010", value: 8.5},
+   {group: "2011", value: 8.3},
+   {group: "2012", value: 8.2},
+   {group: "2013", value: 8.2},
+   {group: "2014", value: 8},
+   {group: "2015", value: 8},
+   {group: "2016", value: 7.8},
+   {group: "2017", value: 7.6}
 ];
 
 var data2 = [
-   {group: "1988", value: 30468750},
-   {group: "1989", value: 30976879},
-   {group: "1990", value: 31512637},
-   {group: "1991", value: 32043729},
-   {group: "1992", value: 32998803},
-   {group: "1993", value: 90},
-   {group: "1994", value: 90},
-   {group: "1995", value: 90},
-   {group: "1996", value: 90},
-   {group: "1997", value: 90},
-   {group: "1998", value: 90},
-   {group: "1999", value: 90},
-   {group: "2000", value: 90},
-   {group: "2001", value: 90},
-   {group: "2002", value: 90},
-   {group: "2003", value: 90},
-   {group: "2004", value: 90},
-   {group: "2005", value: 90},
-   {group: "2006", value: 90},
-   {group: "2007", value: 90},
-   {group: "2008", value: 90},
-   {group: "2009", value: 90},
-   {group: "2010", value: 90},
-   {group: "2011", value: 90},
-   {group: "2012", value: 90},
-   {group: "2013", value: 90},
-   {group: "2014", value: 90},
-   {group: "2015", value: 90},
-   {group: "2016", value: 90},
-   {group: "2017", value: 90},
-   {group: "2018", value: 90}
+   {group: "1988", value: 6.5},
+   {group: "1989", value: 6.4},
+   {group: "1990", value: 6.7},
+   {group: "1991", value: 6.7},
+   {group: "1992", value: 6.9},
+   {group: "1993", value: 7.1},
+   {group: "1994", value: 7.1},
+   {group: "1995", value: 7.41},
+   {group: "1996", value: 7.1},
+   {group: "1997", value: 7.3},
+   {group: "1998", value: 7.5},
+   {group: "1999", value: 7.5},
+   {group: "2000", value: 7.8},
+   {group: "2001", value: 7.7},
+   {group: "2002", value: 8.1},
+   {group: "2003", value: 8.4},
+   {group: "2004", value: 8},
+   {group: "2005", value: 8.5},
+   {group: "2006", value: 8.53},
+   {group: "2007", value: 8.71},
+   {group: "2008", value: 9.1},
+   {group: "2009", value: 9.1},
+   {group: "2010", value: 9.5},
+   {group: "2011", value: 9.9},
+   {group: "2012", value: 10},
+   {group: "2013", value: 10.1},
+   {group: "2014", value: 10.1},
+   {group: "2015", value: 10.3},
+   {group: "2016", value: 10.5},
+   {group: "2017", value: 10.8}
 ];
 
 // set the dimensions and margins of the graph
@@ -107,7 +105,7 @@ svg.append("g")
 
 // Add Y axis
 var y = d3.scaleLinear()
-  .domain([0, 20])
+  .domain([0, 15])
   .range([ height, 0]);
 svg.append("g")
   .attr("class", "myYaxis")
