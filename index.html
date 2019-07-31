@@ -1,6 +1,6 @@
 <html>
   <script src="https://d3js.org/d3.v5.min.js"></script>
-	<div id="my_dataviz"></div>
+	<div id="temperature"></div>
 <head>
   <title>Truths about Climate Change</title>
   <style>
@@ -49,11 +49,11 @@
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 800 - margin.left - margin.right,
+    width = 600 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var svg = d3.select("#temperature")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -62,35 +62,39 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://github.com/nhtrinh1988/Project/blob/master/temperature.csv")
+d3.csv("#temperature.csv",
 
-  // Add X axis
-  var x = d3.scaleLinear()
-    .domain([1880, 2018])
-    .range([ 0, width ]);
-  svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));
+  // Now I can use this dataset:
+  function(data) {
 
-  // Add Y axis
-  var y = d3.scaleLinear()
-    .domain([-2, 2])
-    .range([ height, 0]);
-  svg.append("g")
-    .call(d3.axisLeft(y));
+    // Add X axis --> it is a date format
+    var x = d3.scaleTime()
+      .domain([0,850])
+      .range([ 0, width ]);
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
 
-  // Add line
+    // Add Y axis
+    var y = d3.scaleLinear()
+      .domain([-2,2])
+      .range([ height, 0 ]);
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
+    // Add the line
     svg.append("path")
       .datum(data)
       .attr("fill", "none")
       .attr("stroke", "steelblue")
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
-        .x(function(d,i) { return d(i) })
-        .y(function(d) { return d })
+        .x(function(d) { return x(d.date) })
+        .y(function(d) { return y(d.value) })
         )
 
 })
+
 
 </script>
    
