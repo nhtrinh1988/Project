@@ -105,6 +105,7 @@ svg.selectAll('.bar').data(population)
   .attr('width', xScale.bandwidth())
   .attr('y', d => yScale(d.value))
   .attr('height', d => height - yScale(d.value))
+  .attr("fill", "#69b3a2")
   .on('mouseover', (d) => {
     tooltip.transition().duration(200).style('opacity', 0.9);
     tooltip.html(`Population : <span>${d.value} K</span>`)
