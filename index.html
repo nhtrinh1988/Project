@@ -12,68 +12,106 @@
 
 <body>
   <h1>Japan Population</h1>
-  <p>apan's population is rapidly delcine. Record shows that the population is decreasing since 2008, the statistic charts that we will explore how the declining population is not the only indicator for an unhealthy population growth.</p>
+  <p>Japan's population is rapidly delcine. Record shows that the population is decreasing since 2008, the statistic charts that we will explore how the declining population is not the only indicator for an unhealthy population growth.</p>
 <script>
+const population = [
+   {group: "1988", value: 122613},
+   {group: "1989", value: 123110},
+   {group: "1990", value: 123520},
+   {group: "1991", value: 123920},
+   {group: "1992", value: 122422},
+   {group: "1993", value: 123539},
+   {group: "1994", value: 124965},
+   {group: "1995", value: 125434},
+   {group: "1996", value: 125754},
+   {group: "1997", value: 125093},
+   {group: "1998", value: 126054},
+   {group: "1999", value: 126400},
+   {group: "2000", value: 126631},
+   {group: "2001", value: 126849},
+   {group: "2002", value: 127149},
+   {group: "2003", value: 127440},
+   {group: "2004", value: 127189},
+   {group: "2005", value: 127763},
+   {group: "2006", value: 127778},
+   {group: "2007", value: 127855},
+   {group: "2008", value: 128000},
+   {group: "2009", value: 128065},
+   {group: "2010", value: 128040},
+   {group: "2011", value: 128072},
+   {group: "2012", value: 127621},
+   {group: "2013", value: 127443},
+   {group: "2014", value: 127273},
+   {group: "2015", value: 127147},
+   {group: "2016", value: 126992},
+   {group: "2017", value: 126521}
+];
 
+const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+const width = 960 - margin.left - margin.right;
+const height = 500 - margin.top - margin.bottom;
 
-// set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 90, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 450 - margin.top - margin.bottom;
+const xScale = d3.scaleBand()
+  .range([0, width])
+  .round(true)
+  .paddingInner(0.1); 
+  
+const yScale = d3.scaleLinear()
+  .range([height, 0]);
 
-// append the svg object to the body of the page
-var svg = d3.select("#Population")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+const xAxis = d3.axisBottom()
+  .scale(xScale);
 
-// Parse the Data
-d3.csv("https://raw.githubusercontent.com/nhtrinh1988/Project/master/japanPopulation.csv", function(data) {
+const yAxis = d3.axisLeft()
+  .scale(yScale)
+  .ticks(10);
 
-// X axis
-var x = d3.scaleBand()
-  .range([ 0, width ])
-  .domain(data.map(function(d) { return d.Year; }))
-  .padding(0.2);
-svg.append("g")
-  .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(x))
-  .selectAll("text")
-    .attr("transform", "translate(-10,0)rotate(-45)")
-    .style("text-anchor", "end");
+const svg = d3.select('body')
+  .append('svg')
+  .attr('width', width + margin.left + margin.right)
+  .attr('height', height + margin.top + margin.bottom)
+  .append('g')
+  .attr('transform', `translate(${margin.left}, ${margin.right})`);
 
-// Add Y axis
-var y = d3.scaleLinear()
-  .domain([11600, 13000])
-  .range([ height, 0]);
-svg.append("g")
-  .call(d3.axisLeft(y));
+const tooltip = d3.select('body').append('div')
+  .attr('class', 'tooltip')
+  .style('opacity', 0);
 
-// Bars
-svg.selectAll("mybar")
-  .data(data)
+xScale
+  .domain(population.map(d => d.group));
+yScale
+  .domain([120000, d3.max(population, d => d.value)]);
+
+svg.append('g')
+  .attr('class', 'x axis')
+  .attr('transform', `translate(0, ${height})`)
+  .call(xAxis);
+
+svg.append('g')
+  .attr('class', 'y axis')
+  .call(yAxis)
+  .append('text')
+  .attr('transform', 'rotate(-90)')
+  .attr('y', 6)
+  .attr('dy', '.71em')
+  .style('text-anchor', 'end')
+  .text('Frequency');
+
+svg.selectAll('.bar').data(population)
   .enter()
-  .append("rect")
-    .attr("x", function(d) { return x(d.Year); })
-    .attr("width", x.bandwidth())
-    .attr("fill", "#69b3a2")
-    // no bar at the beginning thus:
-    .attr("height", function(d) { return height - y(0); }) // always equal to 0
-    .attr("y", function(d) { return y(0); })
-
-// Animation
-svg.selectAll("rect")
-  .transition()
-  .duration(800)
-  .attr("y", function(d) { return y(d.Population); })
-  .attr("height", function(d) { return height - y(d.Population); })
-  .delay(function(d,i){console.log(i) ; return(i*100)})
-
-})
-
+  .append('rect')
+  .attr('class', 'bar')
+  .attr('x', d => xScale(d.group))
+  .attr('width', xScale.bandwidth())
+  .attr('y', d => yScale(d.value))
+  .attr('height', d => height - yScale(d.value))
+  .on('mouseover', (d) => {
+    tooltip.transition().duration(200).style('opacity', 0.9);
+    tooltip.html(`Population : <span>${d.value} K</span>`)
+      .style('left', `${d3.event.layerX}px`)
+      .style('top', `${(d3.event.layerY - 28)}px`);
+  })
+  .on('mouseout', () => tooltip.transition().duration(500).style('opacity', 0));
 </script>
  <a href="#BirthRatevsDeathRate.html"><button>Birth Rate vs Death Rate </button></a>
 </body>
