@@ -1,20 +1,23 @@
 <html>
 <meta charset="utf-8">
 <script src="https://d3js.org/d3.v5.min.js"></script>
- <div id="population"></div>
- <body>
-  <h1> Japan Population </h1>
-  <p> ....</p>
   
+<div id="Population"></div>
   
-  <script>
+<head>
+ <title>Life Expectency</title>
+</head>
+<body>
+  <h1>Japan Population </h1>
+<p>........</p>
+<script>
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 90, left: 40},
+var margin = {top: 30, right: 30, bottom: 70, left: 60},
     width = 460 - margin.left - margin.right,
-    height = 450 - margin.top - margin.bottom;
+    height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#population")
+var svg = d3.select("#Population")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -39,7 +42,7 @@ svg.append("g")
 
 // Add Y axis
 var y = d3.scaleLinear()
-  .domain([100000, 130000])
+  .domain([116000, 130000])
   .range([ height, 0]);
 svg.append("g")
   .call(d3.axisLeft(y));
@@ -50,22 +53,18 @@ svg.selectAll("mybar")
   .enter()
   .append("rect")
     .attr("x", function(d) { return x(d.Year); })
+    .attr("y", function(d) { return y(d.Population); })
     .attr("width", x.bandwidth())
+    .attr("height", function(d) { return height - y(d.Population); })
     .attr("fill", "#69b3a2")
-    // no bar at the beginning thus:
-    .attr("height", function(d) { return height - y(0); }) // always equal to 0
-    .attr("y", function(d) { return y(0); })
-
-// Animation
-svg.selectAll("rect")
-  .transition()
-  .duration(800)
-  .attr("y", function(d) { return y(d.Population); })
-  .attr("height", function(d) { return height - y(d.Population); })
-  .delay(function(d,i){console.log(i) ; return(i*100)})
 
 })
-
 </script>
- </body>
+   
+   <a href="TheSun.html" class="next">The Sun?&raquo;</a>
+   <a href="Volcanoes.html" class="next">Volcanoes?&raquo;</a>
+   <a href="Deforestation.html" class="next">Deforestation?&raquo;</a>
+   <a href="GreenHouse.html" class="next">Greenhouse Gases?&raquo;</a>
+   
+  </body>
 </html>
