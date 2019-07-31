@@ -89,7 +89,7 @@ d3.csv("#temperature.csv",
       .attr("stroke", "steelblue")
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
-        .x(function(d) { return x(d.date) })
+        .x(function(d,i) { return d(i) })
         .y(function(d) { return y(d.value) })
         )
 
