@@ -1,0 +1,132 @@
+<html>
+<meta charset="utf-8">
+<script src="https://d3js.org/d3.v5.min.js"></script>
+  
+<button onclick="update(data1)">Female</button>
+<button onclick="update(data2)">Male</button>
+<div id="lifeExpectency"></div>
+  
+<head>
+ <title>Life Expectency</title>
+</head>
+<body>
+  <h1>Steep increasing in Males and Females over 80 years old</h1>
+<p> </p>
+<script>
+  // create 2 data_set
+var data1 = [
+   {group: "1988", value: 919194},
+   {group: "1989", value: 962149},
+   {group: "1990", value: 1000014},
+   {group: "1991", value: 1073456},
+   {group: "1992", value: 1140434},
+   {group: "1993", value: 1197387},
+   {group: "1994", value: 1241182},
+   {group: "1995", value: 1270755},
+   {group: "1996", value: 1338154},
+   {group: "1997", value: 1394033},
+   {group: "1998", value: 1441584},
+   {group: "1999", value: 1481840},
+   {group: "2000", value: 1518631},
+   {group: "2001", value: 1603189},
+   {group: "2002", value: 1681469},
+   {group: "2003", value: 1759530},
+   {group: "2004", value: 1842909},
+   {group: "2005", value: 1939183},
+   {group: "2006", value: 2086318},
+   {group: "2007", value: 2236575},
+   {group: "2008", value: 2383210},
+   {group: "2009", value: 2522435},
+   {group: "2010", value: 2656710},
+   {group: "2011", value: 2815312},
+   {group: "2012", value: 2963621},
+   {group: "2013", value: 3102133},
+   {group: "2014", value: 3230313},
+   {group: "2015", value: 3350147},
+   {group: "2016", value: 3504692},
+   {group: "2017", value: 3642881}
+];
+var data2 = [
+   {group: "1988", value: 1615551},
+   {group: "1989", value: 1715399},
+   {group: "1990", value: 1819621},
+   {group: "1991", value: 1951851},
+   {group: "1992", value: 2084339},
+   {group: "1993", value: 2215415},
+   {group: "1994", value: 2343192},
+   {group: "1995", value: 2466287},
+   {group: "1996", value: 2611845},
+   {group: "1997", value: 2748171},
+   {group: "1998", value: 2883756},
+   {group: "1999", value: 3023626},
+   {group: "2000", value: 3176201},
+   {group: "2001", value: 3360910},
+   {group: "2002", value: 3549859},
+   {group: "2003", value: 3745932},
+   {group: "2004", value: 3945789},
+   {group: "2005", value: 4158781},
+   {group: "2006", value: 4378466},
+   {group: "2007", value: 4600148},
+   {group: "2008", value: 4821586},
+   {group: "2009", value: 5046500},
+   {group: "2010", value: 5284770},
+   {group: "2011", value: 5485342},
+   {group: "2012", value: 5682595},
+   {group: "2013", value: 5881767},
+   {group: "2014", value: 6084138},
+   {group: "2015", value: 6293082},
+   {group: "2016", value: 6474069},
+   {group: "2017", value: 6641542}
+];
+// set the dimensions and margins of the graph
+var margin = {top: 30, right: 30, bottom: 70, left: 60},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+// append the svg object to the body of the page
+var svg = d3.select("#lifeExpectency")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+// X axis
+var x = d3.scaleBand()
+  .range([ 0, width ])
+  .domain(data1.map(function(d) { return d.group; }))
+  .padding(0.2);
+svg.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(x))
+// Add Y axis
+var y = d3.scaleLinear()
+  .domain([900000,6800000])
+  .range([ height, 0]);
+svg.append("g")
+  .attr("class", "myYaxis")
+  .call(d3.axisLeft(y));
+// A function that create / update the plot for a given variable:
+function update(data) {
+  var u = svg.selectAll("rect")
+    .data(data)
+  u
+    .enter()
+    .append("rect")
+    .merge(u)
+    .transition()
+    .duration(1000)
+      .attr("x", function(d) { return x(d.group); })
+      .attr("y", function(d) { return y(d.value); })
+      .attr("width", x.bandwidth())
+      .attr("height", function(d) { return height - y(d.value); })
+      .attr("fill", "#69b3a2")
+}
+// Initialize the plot with the first dataset
+update(data1)
+</script>
+   
+   <a href="population.html" class="next">Japan Population&raquo;</a>
+
+   
+  </body>
+</html>
