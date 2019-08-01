@@ -132,6 +132,28 @@ svg.selectAll('.bar').data(population)
       .style('top', `${(d3.event.layerY - 28)}px`);
   })
   .on('mouseout', () => tooltip.transition().duration(500).style('opacity', 0));
+  
+  const annotations = [
+  {
+    note: {
+      label: "Here is the annotation label",
+      title: "Annotation title"
+    },
+    x: 100,
+    y: 100,
+    dy: 100,
+    dx: 100
+  }
+]
+
+// Add annotation to the chart
+const makeAnnotations = d3.annotation()
+  .annotations(annotations)
+d3.select("#example1")
+  .append("g")
+  .call(makeAnnotations)
+  
+  
 </script>
  <a href="BirthRatevsDeathRate.html">Birth Rate vs Death Rate</a>
 </body>
