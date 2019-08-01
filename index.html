@@ -123,6 +123,7 @@ svg.selectAll('.bar').data(population)
   .attr("fill", "#69b3a2")
   .attr('x', d => xScale(d.group))
   .attr('width', xScale.bandwidth())
+  .transition().duration(3000)
   .attr('y', d => yScale(d.value))
   .attr('height', d => height - yScale(d.value))
   .on('mouseover', (d) => {
