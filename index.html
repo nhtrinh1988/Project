@@ -126,7 +126,7 @@ svg.selectAll('.bar').data(population)
   .attr('height', d => height - yScale(d.value))
   .on('mouseover', (d) => {
     tooltip.transition().duration(200).style('opacity', 0.9);
-    tooltip.html(`Population in <span>${d.group}</span>: <span>${d.value} K</span>`)
+    tooltip.html(`Population in <span>${d.group}: ${d.value} K</span>`)
       .style('left', `${d3.event.layerX}px`)
       .style('top', `${(d3.event.layerY - 28)}px`);
   })
