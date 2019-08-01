@@ -1,34 +1,36 @@
 <html>
 <meta charset="utf-8">
 <script src="https://d3js.org/d3.v5.min.js"></script>
-  <style>
-    a:active {
-  color: yellow;
-  background-color: transparent;
-  text-decoration: underline;
-}
-    a:link, a:visited {
-  background-color: #f44336;
-  color: white;
-  padding: 15px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-}
-a:hover, a:active {
-  background-color: green;
-}
-</style>
+    <style>
+	a:active {
+	  color: yellow;
+	  background-color: transparent;
+	  text-decoration: underline;
+	}
+	    a:link, a:visited {
+	  background-color: #f44336;
+	  color: white;
+	  padding: 15px 25px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	}
+	
+	a:hover, a:active {
+	  background-color: green;
+	}
+	</style>
+
 <button onclick="update(data1)">Female</button>
 <button onclick="update(data2)">Male</button>
-<div id="Population Over 80 Years old"></div>
-
+<div id="lifeExpectency"></div>
+  
 <head>
  <title>Life Expectency</title>
 </head>
 <body>
-  <h1>Steep increasing in Males and Females over 80 years old</h1>
-<p> </p>
+  <h1>Male vs Female Ratio </h1>
+<p>T </p>
 <script>
   // create 2 data_set
 var data1 = [
@@ -142,7 +144,7 @@ function update(data) {
 update(data1)
 </script>
    
- <a href="BirthRatevsDeathRate.html">Birth Rate vs Death Rate</a>
+<a href="BirthRatevsDeathRate.html">Birth Rate vs Death Rate</a>
   <a href="index.html">Japan Population</a>
 
    
